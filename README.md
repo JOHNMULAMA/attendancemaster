@@ -1,48 +1,335 @@
-# local_attendancemaster
+# Attendance Master Moodle Plugin
 
-## Attendance Master Moodle Plugin (Local Type)
+## 📊 Overview
 
-**Description:**
+**Attendance Master** is a powerful enterprise-ready Moodle local plugin built to deliver seamless, mobile-optimized attendance tracking with advanced offline capabilities using Progressive Web App (PWA) technology.
 
-Attendance Master is a comprehensive Moodle local plugin designed for seamless, mobile-friendly attendance tracking with robust offline capabilities via Progressive Web App (PWA) integration. It empowers teachers to efficiently record student attendance using their desktop or mobile devices, track student check-in/out times, monitor detailed attendance history, and automate absence notifications to students.
+Designed for schools, universities, training institutions, and corporate learning environments, Attendance Master transforms attendance management into a reliable, automated, and insight-driven process.
 
-This plugin aims to provide an intuitive and reliable solution for managing attendance, surpassing the features found in many commercial offerings by focusing on user experience, offline functionality, and actionable insights.
+By combining flexible session tracking, intelligent notifications, and offline-first functionality, Attendance Master eliminates manual attendance errors and ensures uninterrupted learning operations.
 
-## Features:
+---
 
-*   **Mobile-Friendly & Responsive:** Optimized for use on any device, from desktops to smartphones.
-*   **Offline Support (PWA):** Teachers can take attendance even without an internet connection. Data is automatically synchronized once connectivity is restored.
-*   **Flexible Attendance Recording:** Mark students as Present, Absent, Late, or Excused.
-*   **Student Check-in/Check-out (Planned for future enhancement of v1.0.0):** Track entry and exit times for more granular control (though current v1.0 focuses on session status).
-*   **Detailed Attendance History:** View comprehensive reports for individual students or entire courses.
-*   **Automated Absence Alerts:** Configure rules to automatically send email notifications to students and/or teachers when absence thresholds are met.
-*   **Manage Attendance Sessions:** Create, edit, and delete attendance sessions specific to each course.
-*   **Role-Based Capabilities:** Granular permissions for recording attendance (teachers), viewing reports (teachers, students), and configuring rules (teachers, managers).
-*   **Global & Course-Level Settings:** Administrators can set global defaults, and teachers/managers can configure course-specific notification thresholds.
-*   **Data Privacy (GDPR/CCPA Compliant):** Implements Moodle's Privacy API for data export and deletion requests.
-*   **Moodle Backup/Restore Support:** Attendance data is included in course backups and restored seamlessly.
+## ⭐ Key Benefits
 
-## Installation Guide:
+✔ Works online and offline
+✔ Mobile-optimized teacher interface
+✔ Real-time attendance analytics
+✔ Automated absence alerts
+✔ GDPR & data privacy compliant
+✔ Reduces administrative workload
+✔ Improves student accountability
 
-1.  **Download:** Obtain the plugin archive (`local_attendancemaster.zip`).
-2.  **Unzip:** Extract the contents of the archive.
-3.  **Upload:** Upload the `attendancemaster` folder into your Moodle `local` directory (e.g., `moodle/local/`).
-4.  **Navigate to Moodle Notifications:** As a Moodle administrator, log in and go to `Site administration > Notifications`. Moodle will detect the new plugin and prompt you to install it.
-5.  **Follow On-Screen Instructions:** Complete the installation process by following the prompts provided by Moodle.
-6.  **Configure Global Settings:** After installation, navigate to `Site administration > Plugins > Local plugins > Attendance Master` to configure global settings like enabling notifications and setting default absence thresholds.
+---
 
-## Configuration Guide:
+## 🚀 Core Features
 
-### Global Settings (Site Administration):
+### 📱 Mobile-First & Responsive Design
 
-1.  Go to `Site administration > Plugins > Local plugins > Attendance Master`.
-2.  **Enable Absence Notifications:** Toggle this setting to enable or disable automatic email alerts for students.
-3.  **Absence Notification Threshold (%):** Set the percentage of missed sessions at which an automatic notification should be triggered (e.g., 20% means a student will be notified if they miss 20% or more of their sessions).
-4.  **PWA Enabled:** Enable this to allow users to install Attendance Master as a Progressive Web App on their mobile devices for offline functionality.
+Attendance Master is fully optimized for:
 
-### Course-Level Configuration (within each course):
+* Desktop computers
+* Tablets
+* Smartphones
+* Touchscreen devices
 
-Access Attendance Master features and settings via the course navigation:
+Teachers can record attendance quickly from any device without additional apps.
 
-1.  Navigate to the desired course.
-2.  In the course navigation menu (usually on the left), look for **
+---
+
+### 🌐 Offline Attendance (PWA Support)
+
+Teachers can record attendance without internet connectivity.
+
+Features include:
+
+* Progressive Web App installation
+* Offline attendance recording
+* Automatic data synchronization when connection is restored
+* Local storage queue management
+* Background sync processing
+
+---
+
+### ✅ Flexible Attendance Recording
+
+Supports multiple attendance states:
+
+* Present
+* Absent
+* Late
+* Excused
+
+Teachers can customize attendance status types based on institutional requirements.
+
+---
+
+### 🕒 Session Management
+
+Create and manage attendance sessions with ease:
+
+* Create recurring sessions
+* Edit or delete sessions
+* Assign sessions to specific courses
+* Manage attendance by date or schedule
+
+---
+
+### 📊 Advanced Attendance Reports
+
+Generate detailed reports including:
+
+* Individual student attendance history
+* Course attendance summaries
+* Attendance trend analysis
+* Exportable attendance records
+
+---
+
+### 🔔 Automated Absence Notification System
+
+Attendance Master can automatically notify students and teachers when attendance thresholds are exceeded.
+
+Supports:
+
+* Configurable absence percentage alerts
+* Email notification system
+* Course-level notification rules
+* Teacher escalation alerts
+
+---
+
+### 🔐 Role-Based Access Control
+
+Secure and flexible permissions allow:
+
+| Role            | Capability                       |
+| --------------- | -------------------------------- |
+| Teachers        | Record attendance, view reports  |
+| Students        | View personal attendance records |
+| Managers/Admins | Configure rules and analytics    |
+
+---
+
+### 🛡 Privacy & Compliance
+
+Attendance Master fully integrates with Moodle Privacy API and complies with:
+
+* GDPR data export requests
+* GDPR data deletion requests
+* Secure attendance record storage
+* User consent management
+
+---
+
+### 💾 Moodle Backup & Restore Integration
+
+The plugin ensures:
+
+* Attendance records are included in course backups
+* Session configurations are preserved
+* Attendance reports remain intact after restoration
+
+---
+
+## 🧩 Technical Architecture
+
+### Database Tables
+
+#### `local_attendancemaster_sessions`
+
+Stores attendance session configurations.
+
+#### `local_attendancemaster_records`
+
+Stores student attendance records.
+
+#### `local_attendancemaster_notifications`
+
+Tracks notification triggers and delivery status.
+
+#### `local_attendancemaster_offline_queue`
+
+Stores offline attendance entries awaiting synchronization.
+
+---
+
+## ⚙ Installation Guide
+
+### Step 1 — Download Plugin
+
+Download or clone the plugin into your Moodle installation:
+
+```
+moodle/local/attendancemaster
+```
+
+---
+
+### Step 2 — Install Plugin
+
+1. Login as Administrator
+2. Navigate to:
+
+```
+Site administration → Notifications
+```
+
+3. Complete installation prompts
+4. Allow Moodle to upgrade database tables
+
+---
+
+### Step 3 — Configure Plugin
+
+Navigate to:
+
+```
+Site administration → Plugins → Local plugins → Attendance Master
+```
+
+---
+
+## ⚙ Configuration Guide
+
+### 🌍 Global Settings
+
+Navigate to:
+
+```
+Site administration → Plugins → Local plugins → Attendance Master
+```
+
+Configure:
+
+* Enable absence notifications
+* Define absence threshold percentage
+* Enable PWA offline mode
+* Configure notification delivery rules
+
+---
+
+### 📘 Course-Level Settings
+
+Teachers can configure attendance inside each course:
+
+1. Open the course
+2. Navigate to Attendance Master in course navigation
+3. Create attendance sessions
+4. Define attendance rules
+5. Configure notification thresholds
+6. Save settings
+
+---
+
+## 🧑‍🏫 Teacher Workflow
+
+1. Open course
+2. Launch Attendance Master
+3. Select session date
+4. Mark student attendance
+5. Save attendance record
+6. Offline data syncs automatically if needed
+
+---
+
+## 🎓 Student Experience
+
+Students can:
+
+* View personal attendance history
+* Receive absence alerts
+* Track attendance performance
+
+---
+
+## 📱 Progressive Web App Installation
+
+Teachers can install Attendance Master as a mobile web app:
+
+1. Open Attendance Master in mobile browser
+2. Select "Install App" option
+3. Access plugin directly from device home screen
+4. Record attendance offline
+
+---
+
+## 📊 Use Cases
+
+✔ Schools and High Schools
+✔ Universities and Colleges
+✔ Corporate Training Programs
+✔ Professional Certification Institutes
+✔ Remote Learning Environments
+✔ Low Bandwidth Learning Regions
+
+---
+
+## 🧪 Testing & Quality Assurance
+
+Attendance Master includes:
+
+* PHPUnit testing coverage
+* Moodle coding standards compliance
+* Offline sync validation testing
+* Role capability enforcement testing
+
+---
+
+## 🔄 Performance Optimization
+
+* Lazy loading attendance sessions
+* Offline queue compression
+* Efficient database indexing
+* Background cron synchronization
+
+---
+
+## 🛣 Product Roadmap
+
+Upcoming planned features:
+
+* Student self check-in system
+* QR-based attendance scanning
+* Biometric integration support
+* Attendance analytics dashboard
+* SMS notification support
+* Calendar integration
+
+---
+
+## 🤝 Support & Custom Development
+
+Enterprise deployment, custom integrations, and feature expansion services are available.
+
+📧 Contact: **[johnmulama001@gmail.com](mailto:johnmulama001@gmail.com)**
+
+---
+
+## 📜 License
+
+GPL v3 or later — Fully compatible with Moodle licensing requirements.
+
+---
+
+## 👨‍💻 Developer
+
+**John Mulama**
+Senior Software Engineer
+Moodle Plugin Specialist
+Digital Learning Solutions Architect
+
+---
+
+## 🌟 Contributing
+
+Contributions, feature requests, and issue reporting are welcome.
+
+Please submit pull requests or create GitHub issues.
+
+---
+
+## 📸 Screenshots
+
+
+
