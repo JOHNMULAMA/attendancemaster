@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/attendancemaster/db" VERSION="2024111500" COMMENT="Database schema for Attendance Master plugin" PEDANTIC="true">
+  <TABLES>
+
+    <TABLE NAME="local_attendancemaster_sessions" COMMENT="Stores attendance sessions for courses" VIRTUAL="false">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="Primary key for the session"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="ID of the course this session belongs to"/>
+        <FIELD NAME="sessionname" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" COMMENT="Name of the attendance session"/>
+        <FIELD NAME="sessiondate" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Unix timestamp for the session date"/>
+        <FIELD NAME="description" TYPE="text" NOTNULL="false" COMMENT="Optional description for the session"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Last modified timestamp"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Creation timestamp"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFERENCE="course" PMKEY="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="courseid_idx" FIELDS="courseid"/>
+        <INDEX NAME="sessiondate_idx" FIELDS="sessiondate"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_attendancemaster_records" COMMENT="Stores individual attendance records for students" VIRTUAL="false">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="Primary key for the attendance record"/>
+        <FIELD NAME="sessionid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="ID of the attendance session"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="ID of the student"/>
+        <FIELD NAME="status" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Attendance status (0: Absent, 1: Present, 2: Late, 3: Excused)"/>
+        <FIELD NAME="timeslot" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Timestamp when attendance was marked"/>
+        <FIELD NAME="notes" TYPE="text" NOTNULL="false" COMMENT="Optional notes for the attendance record"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Last modified timestamp"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Creation timestamp"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="sessionid" TYPE="foreign" FIELDS="sessionid" REFERENCE="local_attendancemaster_sessions" PMKEY="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFERENCE="user" PMKEY="id"/>
+        <KEY NAME="sessionid_userid_unique" TYPE="unique" FIELDS="sessionid,userid" COMMENT="Ensure only one record per user per session"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sessionid_idx" FIELDS="sessionid"/>
+        <INDEX NAME="userid_idx" FIELDS="userid"/>
+        <INDEX NAME="status_idx" FIELDS="status"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_attendancemaster_notifications" COMMENT="Stores triggered absence notifications" VIRTUAL="false">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="Primary key for the notification"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="ID of the course"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="ID of the student user"/>
+        <FIELD NAME="triggerdate" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Unix timestamp when notification was triggered"/>
+        <FIELD NAME="reason" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" COMMENT="Reason for notification (e.g., 'Absence Threshold Reached')"/>
+        <FIELD NAME="isacknowledged" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Whether the notification has been acknowledged (0: No, 1: Yes)"/>
+        <FIELD NAME="timesent" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Timestamp when the email was actually sent"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Last modified timestamp"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Creation timestamp"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="courseid_fk" TYPE="foreign" FIELDS="courseid" REFERENCE="course" PMKEY="id"/>
+        <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFERENCE="user" PMKEY="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="courseid_idx" FIELDS="courseid"/>
+        <INDEX NAME="userid_idx" FIELDS="userid"/>
+        <INDEX NAME="triggerdate_idx" FIELDS="triggerdate"/>
+        <INDEX NAME="isacknowledged_idx" FIELDS="isacknowledged"/>
+      </INDEXES>
+    </TABLE>
+
+  </TABLES>
+</XMLDB>
