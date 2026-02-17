@@ -315,6 +315,7 @@ GPL v3 or later — Fully compatible with Moodle licensing requirements.
 ## 👨‍💻 Developer
 
 **John Mulama**
+
 Senior Software Engineer.
 
 Moodle Plugin Specialist.
